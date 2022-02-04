@@ -1,4 +1,4 @@
-name: Ma Cantine CI
+name: Test clever cloud
 
 on:
   pull_request:
@@ -17,4 +17,22 @@ jobs:
         with:
           node-version: '14'
       - run: yarn
+      - run: yarn lint
       - run: yarn test
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: yarn
+      - run: yarn build
+      - uses: 47ng/actions-clever-cloud@v1
+        with:
+          appID: app_2b37bf55-da17-40d9-ad15-8c7043d0209f
+    env:
+      CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
+      CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
