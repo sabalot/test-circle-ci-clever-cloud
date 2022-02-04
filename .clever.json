@@ -1,0 +1,11 @@
+{
+  "apps": [
+    {
+      "app_id": "app_2b37bf55-da17-40d9-ad15-8c7043d0209f",
+      "org_id": "user_ac123e5b-e72e-4f54-aa91-253e1b6354aa",
+      "deploy_url": "https://push-n2-par-clevercloud-customers.services.clever-cloud.com/app_2b37bf55-da17-40d9-ad15-8c7043d0209f.git",
+      "name": "snowpact-test-app",
+      "alias": "snowpact-test-app"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+name: Test clever cloud
+
+on:
+  pull_request:
+  push:
+    branches:
+      - develop
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: yarn
+      - run: yarn lint
+      - run: yarn test
+
+  deploy:
+    runs-on: ubuntu-latest
+    if: >-
+      github.ref == 'refs/heads/master' ||
+      github.ref == 'refs/heads/develop'
+    needs: build
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: yarn
+      - run: yarn build
+      - uses: 47ng/actions-clever-cloud@v1
+        with:
+          alias: snowpact-test-app
+        env:
+          CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
+          CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
