@@ -3,7 +3,7 @@ import router from './app';
 export default (): void => {
   try {
     const app = router();
-    app.listen(3000, () => {
+    app.listen(process.env.PORT ?? 8080, () => {
       console.log('Server is Running!');
     });
   } catch (error) {
