@@ -12,6 +12,6 @@ describe('test app', () => {
   });
 
   it('responds to /', async () => {
-    await request(app).get('/hello').expect(200).expect('hello world 7');
+    await request(app).get('/hello').expect(200).expect('hello world 12');
   });
 });

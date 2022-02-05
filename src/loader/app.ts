@@ -5,7 +5,7 @@ export default (): Express => {
   const app = express();
 
   app.get('/hello', (_req, res) => {
-    const result = addition(5, 2);
+    const result = addition(5, 7);
     res.send(`hello world ${result}`);
   });
 

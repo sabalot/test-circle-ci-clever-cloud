@@ -30,6 +30,7 @@ jobs:
       - uses: 47ng/actions-clever-cloud@v1
         with:
           alias: snowpact-test-app
+          CLEVER_ENV_CC_POST_BUILD_HOOK: 'sh ./build.sh'
         env:
           CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
           CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
