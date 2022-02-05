@@ -8,7 +8,7 @@ on:
       - master
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,20 +20,13 @@ jobs:
       - run: yarn lint
       - run: yarn test
 
-  deploy:
+  deploy-production:
     runs-on: ubuntu-latest
-    if: >-
-      github.ref == 'refs/heads/master' ||
-      github.ref == 'refs/heads/develop'
-    needs: build
+    if: github.ref == 'refs/heads/master'
+    needs: test
     steps:
       - uses: actions/checkout@v2
       - run: git fetch --prune --unshallow
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - run: yarn
-      - run: yarn build
       - uses: 47ng/actions-clever-cloud@v1
         with:
           alias: snowpact-test-app
